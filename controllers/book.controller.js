@@ -12,7 +12,7 @@ let getBookById = async (req, res, next) => {
 };
 
 let addBook = async (req, res, next) => {
-  let data = JSON.parse(req.body.body);
+  let data = req.body;
   data.image = "/uploads/books/" + req.file.filename;
 
   let book = await Book.create(data);
@@ -20,9 +20,9 @@ let addBook = async (req, res, next) => {
 };
 
 let deleteBook = async (req, res, next) => {
-    let id  = req.params.id
-    await Book.findByIdAndDelete(id)
-    res.status(203).json({name: "book"})
-}
+  let id = req.params.id;
+  await Book.findByIdAndDelete(id);
+  res.status(203).json({ name: "book" });
+};
 
 module.exports = { getAllBooks, getBookById, addBook, deleteBook };
